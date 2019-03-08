@@ -5,7 +5,7 @@
 A web app for collecting useful resources for programmers and programming students.
 
 
-### Current Features
+## Current Features
 
 * The front page shows latest news from TechCrunh
 * User can register and / or login to the service
@@ -14,8 +14,7 @@ A web app for collecting useful resources for programmers and programming studen
 * Logged in User can access the tool for listing possible internship organisations
 * List data is saved to database for registered user to add, modify and delete his / her data
 
-
-### Tech Used
+## Tech Used
 
 * Node.js
 * Express.js
@@ -26,7 +25,7 @@ A web app for collecting useful resources for programmers and programming studen
 * CSS
 * Bootstrap 4
 
-### Screnshots
+## Screnshots
 
 ![](public/img/screenshot2.png)
 ![](public/img/screenshot3.png)
