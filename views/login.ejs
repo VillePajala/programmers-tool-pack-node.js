@@ -1,0 +1,43 @@
+<%- include("includes/header"); -%>
+
+        <div id="ylatunniste" class="container"> 
+            <h1 class="mb-2">Programmer's<br>Tool Pack</h1> 
+        </div>
+
+        <div class="container mb-4">
+            <br>
+            <br>
+            <form class="form-signin" method="POST" action="/login/">
+                <h2 class="mb-3">Kirjaudu sisään palveluun</h2>
+                <label for="tunnus" class="sr-only ">Käyttäjätunnus</label>
+                <input type="text" id="tunnus" name="tunnus" class="form-control mb-2" placeholder="Kirjoita tunnus..." autofocus>
+                <label for="salasana" class="sr-only">Salasana</label>
+                <input type="password" id="salasana" name="salasana" class="form-control" placeholder="Kirjoita salasana...">
+                
+                <div id="napit" class="container">
+                    <label for="remember">Muista minut &nbsp</label>
+                    <input type="checkbox" id="remember" name="remember" value="1" />
+                </div>
+
+                <input type="submit" id="logout" class="btn btn-lg btn-primary btn-block mb-2" value="Kirjaudu">
+                <a href="/" id="logout" class="btn btn-secondary btn-lg btn-block mb-4">Peruuta</a>
+
+                <div id="napit" class="container">
+                    <a href="/rekisteroidy/" id="logout" class="btn btn-primary btn-lg btn-sm mb-4">Rekisteröidy</a>
+                </div>
+
+                <% if (virhe) { %>
+                    <div class="alert alert-danger">
+                        <%=virhe%>
+                    </div>    
+                <% } %>
+            </form>
+        </div>
+    </div>
+    <br>
+
+    <%- include("includes/footer"); -%>
+
+
+
+    

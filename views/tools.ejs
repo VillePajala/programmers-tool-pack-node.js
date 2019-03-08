@@ -1,0 +1,98 @@
+
+    <%- include("includes/header"); -%>
+    
+    <div id="ylatunniste" class="container">   
+        <h1 class="mb-2">Programmer's<br>Tool Pack</h1> 
+
+        <% if (kayttaja) { %>
+            <div class="container">
+                <h5><%=kayttaja.tunnus%> &nbsp</h5>
+                <h5>
+                    <a href="/etusivu/" id="logout" class="btn btn-secondary btn-sm">Etusivu</a>
+                    <a href="/tools/" id="logout" class="btn btn-secondary btn-sm">Työkalut</a>
+                    <a href="/logout/" id="logout" class="btn btn-secondary btn-sm">Kirjaudu ulos</a>
+                </h5>
+            </div>
+            <br>
+        <% } else { %>
+            <div class="container">
+                <h5>
+                    <a href="/etusivu/" id="logout" class="btn btn-secondary btn-sm">Etusivu</a>
+                    <a href="/tools/" id="logout" class="btn btn-secondary btn-sm">Työkalut</a>
+                    <a href="/kirjaudu/" id="logout" class="btn btn-secondary btn-sm">Kirjaudu</a>
+                </h5>
+            </div>
+        <% }; %>
+    </div>
+
+    <div class="container-fluid">
+        <form method="POST" action="/tallenna">
+            <h4>Työharjoittelupaikat</h4>
+            <h6>Listaa tähän mahdolliset työharjoittelupaikat ja niiden tiedot</h6>
+            <br>
+            <table class="table table-bordered table-responsive-lg table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Yritys</th>
+                        <th>Sijainti</th>
+                        <th>Hakuaika</th>
+                        <th>Verkkosivu</th>
+                        <th>Yhteystiedot</th>
+                        <th>Muistiinpanot</th>
+                        <th>Toiminnot</th>
+                    </tr>
+                </thead>
+                <tbody>  
+                    <% if (tiedot) { %>
+                        <% tiedot.forEach((tieto) => { %>
+                            <% if (muokattava != null && tieto.id == muokattava.id) { %>
+                                <tr>
+                                    <td><input type="text" name="yritys" class="form-control" value="<%=tieto.yritys%>"></td>
+                                    <td><input type="text" name="sijainti" class="form-control" value="<%=tieto.sijainti%>"></td>
+                                    <td><input type="date" name="hakuaika" value="2019-01-01"></td>
+                                    <td><input type="text" name="verkkosivu" class="form-control" value="<%=tieto.verkkosivu%>"></td>
+                                    <td><input type="text" name="yhteystiedot" class="form-control" value="<%=tieto.yhteystiedot%>"></td>
+                                    <td><input type="text" name="muistiinpanot" class="form-control" value="<%=tieto.muistiinpanot%>"></td>
+                                    <input type="hidden" name="entryId" value="<%=muokattava.id%>">
+                                    <td><input type="submit" id="logout2" name="tallenna" value="Tallenna" class="btn btn-primary btn-sm"></td>
+                                </tr>
+                            <% } else { %>
+                                <tr>    
+                                    <td><%=tieto.yritys%></td>
+                                    <td><%=tieto.sijainti%></td>
+                                    <td><%=tieto.hakuaika%></td>
+                                    <td><a target="_blank" href="<%=tieto.verkkosivu%>"><%=tieto.verkkosivu%></a></td>
+                                    <td><%=tieto.yhteystiedot%></td>
+                                    <td><%=tieto.muistiinpanot%></td>
+                                    <td><a href="/muokkaa/<%=tieto.id%>" id="logout2" class="btn btn-secondary btn-sm">Muokkaa</a><a href="/poista/<%=tieto.id%>" id="logout2" class="btn btn-secondary btn-sm" onclick="return vahvista()">Poista</a></td>
+                                </tr>
+                            <% } %>
+                        <% }); %>
+                    <% } %>
+            
+                    <% if (virhe) { %>
+                        <div class="alert alert-danger">
+                            <%=virhe%>
+                        </div>  
+                    <% } %>
+
+                    <tr>
+                        <td><input type="text" name="yritys" class="form-control" id="input" placeholder="Yrityksen nimi"></td>
+                        <td><input type="text" name="sijainti" class="form-control" id="input" placeholder="Yrityksen osoite"></td>
+                        <td><input type="date" name="hakuaika" value="2019-01-01" id="input" placeholder="Viimeinen hakupäivä"></td>
+                        <td><input type="text" name="verkkosivu" class="form-control" id="input" placeholder="www-osoite"></td>
+                        <td><input type="text" name="yhteystiedot" class="form-control" id="input" placeholder="Yhteystiedot"></td>
+                        <td><input type="text" name="muistiinpanot" class="form-control" id="input" placeholder="Muistiinpanoja"></td>
+                        <td><input type="submit" id="logout2" name="tallenna" value="Tallenna" class="btn btn-primary btn-sm" id="logout"></td>
+                    </tr>
+                </tbody>
+            </table>   
+        </form>
+    </div>
+    <br>
+</div>
+
+<%- include("includes/footer"); -%>
+
+
+

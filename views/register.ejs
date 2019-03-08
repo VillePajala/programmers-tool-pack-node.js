@@ -1,0 +1,33 @@
+<%- include("includes/header"); -%>
+
+        <div id="ylatunniste" class="container">   
+            <h1 class="mb-2">Programmer's<br>Tool Pack</h1> 
+        </div>
+        
+        <div id= class="container mb-4">
+            <br>
+            <br>
+            <form class="form-signin" method="POST" action="/newuser/">
+                <h2 class="mb-3">Rekisteröi uusi käyttäjä</h2>
+                <label for="tunnus" class="sr-only">Valitse käyttäjätunnus</label>
+                <input type="text" id="tunnus" name="tunnus" class="form-control mb-2" placeholder="Valitse käyttäjätunnus..." autofocus>
+                <label for="salasana" class="sr-only">Valitse Salasana</label>
+                <input type="password" id="salasana" name="salasana" class="form-control" placeholder="Valitse Salasana...">
+                <input type="submit" id="logout" class="btn btn-lg btn-primary btn-block mb-2" value="Rekisteröidy">
+                <a href="/" id="logout" class="btn btn-secondary btn-lg btn-block mb-4">Peruuta</a>
+                
+                <% if (virhe) { %>
+                    <div class="alert alert-danger">
+                        <%=virhe%>
+                    </div>    
+                <% } %>
+            </form>
+        </div>
+    </div>
+    <br>
+
+    <%- include("includes/footer"); -%>
+
+
+
+    

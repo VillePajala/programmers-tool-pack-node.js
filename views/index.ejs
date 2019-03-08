@@ -1,0 +1,111 @@
+<%- include("includes/header"); -%>
+    
+
+<div id="ylatunniste" class="container">      
+    <h1 class="mb-2">Programmer's<br>Tool Pack</h1> 
+
+    <% if (kayttaja) { %>
+        <div class="container">
+            <h5><%=kayttaja.tunnus%> &nbsp</h5>
+            <h5>
+                <a href="/etusivu/" id="logout" class="btn btn-secondary btn-sm">Etusivu</a>
+                <a href="/tools/" id="logout" class="btn btn-secondary btn-sm">Työkalut</a>
+                <a href="/logout/" id="logout" class="btn btn-secondary btn-sm">Kirjaudu ulos</a>
+            </h5>
+        </div>
+        <br>
+    <% } else { %>
+        <div class="container">
+            <h5>
+                <a href="/" id="logout" class="btn btn-secondary btn-sm">Etusivu</a>
+                <a href="/tools/" id="logout" class="btn btn-secondary btn-sm">Työkalut</a>
+                <a href="/kirjaudu/" id="logout" class="btn btn-secondary btn-sm">Kirjaudu</a>
+            </h5>
+        </div>
+    <% }; %>
+
+</div>
+
+        <br>
+        <div  class="container mb-4">
+            <br>
+            <div class="container" id="otsikko" style="max-width: 500px">
+                <hr>
+                <h6>Tervetuloa Programmer's Tool Pack -palveluun. 
+                    Täältä löydät viimeisimmät ohjelmointiin liittyvät uutiset 
+                    ja työkalut -sivulta ammatillisia apuvälineitä.</h6>
+                <hr>
+            </div>
+            <br>
+        </div>
+
+        <% if (tulokset) { %>
+            <% if (kayttaja) { %>
+                <form method="POST" action="/hae">
+                    <div class="row" id="content">
+                        <div class="container" id="buttonbox">
+                            <h5>Hae:</h5>
+                        </div>
+
+                        <div class="container">
+                            <input type="text" name="hakusana" class="form-control" value="">
+                        </div>
+                    
+                        <div class="container">
+                            <label class="radio-inline ml-3 mt-2">
+                                <input type="radio" name="jarjestys" value="uusimmat" checked>&nbspUusimmat
+                                <input type="radio" name="jarjestys" value="osuvimmat">&nbspOsuvimmat
+                                <input type="radio" name="jarjestys" value="suosituimmat">&nbspSuosituimmat
+                            </label>
+                        </div>
+
+                        <div class="container" id="buttonbox">
+                            <input class="btn btn-primary" type="submit" value="Hae">
+                        </div>
+                    </div>
+                    <br><br>
+                </form>
+            <% } %>
+
+            <% tulokset.forEach((tulos) => { %>
+                <% let aika = new Date(tulos.publishedAt); %>
+                
+                <div class="card mb-1" id="content">
+                    <a href="<%=tulos.url%>" target="_blank">
+                        <div class="row">
+                            <div class="d-none d-md-block col-md-3 col-lg-3 " id="keskitys">
+                                <img  src="<%=tulos.urlToImage%>">
+                            </div>
+
+                            <div class="col-md-9 col-lg-9 col-xs-12" id="sisalto">
+                                <h6 id="uutisotsikko"><%=tulos.title%></h6> 
+                                <p id="aikaleima" class="mb-2"><%=tulos.author%> - <i><%=tulos.source.name%> - <%=aika.getDate()%>.<%=aika.getMonth()+1%>.
+                                    klo <%=aika.getHours()%>:<%=(aika.getMinutes() < 10 ? "0" : '' ) + aika.getMinutes() %></i></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+
+        <% } else {%>
+            <% if (virhe) {%>
+                <div class="card w-100" id="keskitys">
+                    <br>
+                    <h6><%=virhe%></h6>
+                    <br>
+                </div>
+            <% } %>
+        <% } %>
+
+        <div class="container" id="sisalto">
+            <a href="https://techcrunch.com/"><h6>Powered by TechCrunch</h6></a>
+        </div>
+        
+        <br>
+    </div>
+
+    <%- include("includes/footer"); -%>
+
+
+
+    
